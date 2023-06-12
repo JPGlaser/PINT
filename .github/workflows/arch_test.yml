@@ -14,7 +14,7 @@ env:
   HYPOTHESIS_PROFILE: 'ci'
 
 jobs:
-    base-python-env:
+    pip-env:
         name: ${{ matrix.os }}, Python ${{ matrix.python }}
         runs-on: ${{ matrix.os }}
         if: "!(contains(github.event.head_commit.message, '[skip ci]') || contains(github.event.head_commit.message, '[ci skip]'))"
@@ -25,13 +25,13 @@ jobs:
                 os: [ubuntu-latest, macos-latest] #[ubuntu-latest, ubuntu-20.04, macos-13, macos-12, macos-11]
         steps:
         - name: Check out repository
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         - name: Set up Python ${{ matrix.python }}
-          uses: actions/setup-python@v2
+          uses: actions/setup-python@v3
           with:
             python-version: ${{ matrix.python }}
         - name: Install base dependencies
-          run: pwd && python -m pip install --upgrade pip && cd $GITHUB_WORKSPACE/PINT && python -m pip install .
+          run: pwd && python -m pip install --upgrade pip && python -m pip install .
         - name: Run test
-          run: python -m $GITHUB_WORKSPACE/PINT/validation/architecture.py
+          run: python -m validation/architecture.py
 
