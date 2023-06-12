@@ -1,11 +1,12 @@
 import sys
+import io
+import platform
 import numpy as np
 import astropy
 from pint.models import get_model_and_toas
 import pint.fitter
 import pint.utils
 import pint.logging
-import io
 
 par = """# Created: 2023-05-23T10:08:47.546618
 # PINT_version: 0.9.5
@@ -86,6 +87,22 @@ print(f"# python_version: {sys.version}")
 print(f"# numpy_version: {np.__version__}")
 print(f"# astropy_version: {astropy.__version__}")
 print(pint.utils.info_string(prefix_string="# "))
+
+
+#Computer network name
+print(f"Computer network name: {platform.node()}")
+#Machine type
+print(f"Machine type: {platform.machine()}")
+#Processor type
+print(f"Processor type: {platform.processor()}")
+#Platform type
+print(f"Platform type: {platform.platform()}")
+#Operating system
+print(f"Operating system: {platform.system()}")
+#Operating system release
+print(f"Operating system release: {platform.release()}")
+#Operating system version
+print(f"Operating system version: {platform.version()}")
 
 # dmx values that are gotten by D Kaplan and Krishnakumar
 dmx_dlk = np.array([-0.022862539247389357, 0.0040382142830872585])
