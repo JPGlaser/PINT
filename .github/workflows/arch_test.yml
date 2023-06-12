@@ -33,5 +33,5 @@ jobs:
         - name: Install base dependencies
           run: pwd && python -m pip install --upgrade pip && python -m pip install .
         - name: Run test
-          run: python -m validation/architecture.py
+          run: python validation/architecture.py
 
