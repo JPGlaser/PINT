@@ -31,7 +31,7 @@ jobs:
           with:
             python-version: ${{ matrix.python }}
         - name: Install base dependencies
-          run: pwd && python -m pip install --upgrade pip && python -m pip install .
+          run: pwd && python -m pip install --upgrade pip pandas && python -m pip install .
         - name: Run test
           run: python validation/architecture.py
 
