@@ -89,7 +89,7 @@ tim = """FORMAT 1
 
 
 pint.logging.setup("WARNING")
-arch_info = pd.Dataframe({'SubmissionDate' : [datetime.datetime.now().isoformat()],
+arch_info = pd.DataFrame({'SubmissionDate' : [datetime.datetime.now().isoformat()],
                           'Platform_arch' : [platform.machine()],
                           'Platform_cpu' : [platform.processor()],
                           'Platform_os' : [platform.system()+platform.release()],
