@@ -8,20 +8,10 @@ from pint.models import get_model_and_toas
 import pint.fitter
 import pint.utils
 import pint.logging
-import git
 import datetime
 import pyerfa, scipy, jplephem, emcee, uncertainties, nestle
-
 import getpass
 
-def get_Username():
-    try:
-        # user-level git config
-        c = git.GitConfigParser()
-        username = c.get_value("user", option="name") + f" ({getpass.getuser()})"
-    except ():
-        username = getpass.getuser()
-    return username
 
 par = """# Created: 2023-05-23T10:08:47.546618
 # PINT_version: 0.9.5
@@ -105,7 +95,7 @@ arch_info = pd.Dataframe({'SubmissionDate' : [datetime.datetime.now().isoformat(
                           'Platform_os' : [platform.system()+platform.release()],
                           'Platform_kernel' : [platform.release()],
                           'Computer_name' : [platform.node()],
-                          'Contributing_user': [get_Username()],
+                          'Contributing_user': [getpass.getuser()],
                           'Version_python' : [sys.version],
                           'version_pint' : [pint.__version__], 
                           'Version_numpy' : [np.__version__],
