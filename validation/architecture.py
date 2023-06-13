@@ -9,7 +9,7 @@ import pint.fitter
 import pint.utils
 import pint.logging
 import datetime
-import pyerfa, scipy, jplephem, emcee, uncertainties, nestle
+import erfa, scipy, jplephem, emcee, uncertainties, nestle
 import getpass
 
 
@@ -100,7 +100,7 @@ arch_info = pd.Dataframe({'SubmissionDate' : [datetime.datetime.now().isoformat(
                           'version_pint' : [pint.__version__], 
                           'Version_numpy' : [np.__version__],
                           'Version_astropy' : [astropy.__version__],
-                          'Version_pyerfa': [pyerfa.__version__], 
+                          'Version_pyerfa': [erfa.__version__], 
                           'Version_scipy' : [scipy.__version__],
                           'Version_jplephem' : [jplephem.__version__],
                           'Version_emcee': [emcee.__version__],
