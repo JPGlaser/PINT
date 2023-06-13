@@ -130,8 +130,8 @@ print(
 )
 for i, col_name in enumerate(dmxoutput["bins"]):
     print(col_name)
-    print(dmxoutput['dxms'][i])
+    print(dmxoutput['dmxs'][i])
     print(dmxoutput['mean_dmx'])
-    logArray[col_name] = dmxoutput['dxms'][i].value+dmxoutput['mean_dmx']
+    logArray[col_name] = dmxoutput['dmxs'][i].value+dmxoutput['mean_dmx']
 
 print(logArray)
