@@ -89,7 +89,7 @@ tim = """FORMAT 1
 
 
 pint.logging.setup("WARNING")
-arch_info = pd.DataFrame({'SubmissionDate' : [datetime.datetime.now().isoformat()],
+logArray = pd.DataFrame({'SubmissionDate' : [datetime.datetime.now().isoformat()],
                           'Platform_arch' : [platform.machine()],
                           'Platform_cpu' : [platform.processor()],
                           'Platform_os' : [platform.system()+platform.release()],
@@ -107,8 +107,6 @@ arch_info = pd.DataFrame({'SubmissionDate' : [datetime.datetime.now().isoformat(
                           'Version_uncertainties' : [uncertainties.__version__],
                           'Version_nestle' : [nestle.__version__]
                           })
-print(arch_info)
-
 # dmx values that are gotten by D Kaplan and Krishnakumar
 dmx_dlk = np.array([-0.022862539247389357, 0.0040382142830872585])
 dmx_kk = np.array([-0.02286136775682614, 0.0040378097214163])
@@ -130,3 +128,10 @@ print(
 print(
     f"Differences wrt KK: {(dmxoutput['dmxs'].value+dmxoutput['mean_dmx'].value-dmx_kk)/dmx_kk}"
 )
+for i, col_name in enumerate(dmxoutput["bins"]):
+    print(col_name)
+    print(dmxoutput['dxms'][i])
+    print(dmxoutput['mean_dmx'])
+    logArray[col_name] = dmxoutput['dxms'][i].value+dmxoutput['mean_dmx']
+
+print(logArray)
