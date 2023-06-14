@@ -159,7 +159,7 @@ ws = gs.worksheet('Sheet1')
 # Appending via: https://gist.github.com/Dminor7/0b0cb8d6b711a3bedd72a14f312883d1
 
 ws.clear()
-set_with_dataframe(worksheet=ws,dataframe=df,include_index=False,include_column_header=True,resize=True)
+set_with_dataframe(worksheet=ws,dataframe=logArray,include_index=False,include_column_header=True,resize=True)
 #ws.add_rows(logArray.shape[0])
 #set_with_dataframe(worksheet=ws, dataframe=logArray, include_index=False, include_column_header=False, resize=False, row=ws.row_count+1)
 #df_values = logArray.values.tolist()
