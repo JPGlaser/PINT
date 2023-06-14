@@ -110,28 +110,26 @@ logArray = pd.DataFrame({'SubmissionDate' : [datetime.datetime.now().isoformat()
 # dmx values that are gotten by D Kaplan and Krishnakumar
 dmx_dlk = np.array([-0.022862539247389357, 0.0040382142830872585])
 dmx_kk = np.array([-0.02286136775682614, 0.0040378097214163])
-
-
 # m, t = get_model_and_toas("J0621+1002_kk_DMX_tdb.par", "J0621+1002_two-testToAs.tim")
 m, t = get_model_and_toas(io.StringIO(par), io.StringIO(tim))
-print(f"Free parameters: {m.free_params}")
+#print(f"Free parameters: {m.free_params}")
 f = pint.fitter.Fitter.auto(t, m)
 f.fit_toas()
 dmxoutput = pint.utils.dmxparse(f)
-for i in range(len(dmxoutput["bins"])):
-    print(
-        f"{dmxoutput['bins'][i]}: ({dmxoutput['r1s'][i]}-{dmxoutput['r2s'][i]}): {dmxoutput['dmxs'][i]+dmxoutput['mean_dmx']}: {dmxoutput['dmx_verrs'][i]}"
-    )
-print(
-    f"Differences wrt DLK: {(dmxoutput['dmxs'].value+dmxoutput['mean_dmx'].value-dmx_dlk)/dmx_dlk}"
-)
-print(
-    f"Differences wrt KK: {(dmxoutput['dmxs'].value+dmxoutput['mean_dmx'].value-dmx_kk)/dmx_kk}"
-)
+#for i in range(len(dmxoutput["bins"])):
+#    print(
+#        f"{dmxoutput['bins'][i]}: ({dmxoutput['r1s'][i]}-{dmxoutput['r2s'][i]}): {dmxoutput['dmxs'][i]+dmxoutput['mean_dmx']}: {dmxoutput['dmx_verrs'][i]}"
+#    )
+#print(
+#    f"Differences wrt DLK: {(dmxoutput['dmxs'].value+dmxoutput['mean_dmx'].value-dmx_dlk)/dmx_dlk}"
+#)
+#print(
+#    f"Differences wrt KK: {(dmxoutput['dmxs'].value+dmxoutput['mean_dmx'].value-dmx_kk)/dmx_kk}"
+#)
 for i, col_name in enumerate(dmxoutput["bins"]):
     print(col_name)
     print(dmxoutput['dmxs'][i])
     print(dmxoutput['mean_dmx'])
     logArray[col_name] = (dmxoutput['dmxs'][i]+dmxoutput['mean_dmx']).value
-
+logArray['mean_dmx'] = dmxoutput['mean_dmx'].value
 print(logArray)
