@@ -34,7 +34,7 @@ jobs:
         - name: Update PIP and Install Pandas
           run: python -m pip install --upgrade pip pandas
         - name: "Install Specific Astropy"
-          run: pip install --force-reinstall -v astropy==${{ matrix.astropy}}
+          run: pip uninstall numpy && pip install --force-reinstall -v astropy==${{ matrix.astropy}}
         - name: Install PINT
           run: python -m pip install -e .
         - name: 'Authenticate to Google Cloud'
