@@ -154,9 +154,10 @@ drive = GoogleDrive(gauth)
 
 # open a google sheet
 gs = gc.open_by_key("1fafopRuFhQZMhlA1TfQt__jBoSeq6LcilvY-sKsDmHI")# select a work sheet from its name
-targeted_sheet = gs.worksheet('Sheet1')
+ws = gs.worksheet('Sheet1')
 
-targeted_sheet.clear()
-#set_with_dataframe(worksheet=targeted_sheet, dataframe=logArray, include_index=False, include_column_header=True, resize=True)
-df_values = logArray.values.tolist()
-gs.values_append('Sheet1', {'valueInputOption': 'RAW'}, {'values': df_values})
+# Appending via: https://gist.github.com/Dminor7/0b0cb8d6b711a3bedd72a14f312883d1
+ws.add_rows(logArray.shape[0])
+set_with_dataframe(worksheet=ws, dataframe=logArray, include_index=False, include_column_header=False, resize=False, row=ws.row_count+1)
+#df_values = logArray.values.tolist()
+#gs.values_append('Sheet1', {'valueInputOption': 'RAW'}, {'values': df_values})
