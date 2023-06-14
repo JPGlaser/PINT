@@ -38,7 +38,8 @@ jobs:
             service_account: ${{secrets.SERVICE_ACCT}}
             credentials_json: '${{ secrets.ARCHSHEETKEY }}'
             create_credentials_file: True
-          run: ls $GITHUB_WORKSPACE
+        - name: "Testing File Structure"
+          run: ls -lah $GITHUB_WORKSPACE
         - name: Run test
           run: python validation/architecture.py
 
