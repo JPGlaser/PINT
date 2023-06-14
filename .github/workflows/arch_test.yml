@@ -38,6 +38,8 @@ jobs:
             service_account: ${{secrets.SERVICE_ACCT}}
             credentials_json: '${{ secrets.ARCHSHEETKEY }}'
             create_credentials_file: True
+        - name: "Install Google API Dependencies"
+          run: python -m pip install gspread gspread-dataframe google pydrive
         - name: "Testing File Structure"
           run: ls -lah $GITHUB_WORKSPACE
         - name: Run test
