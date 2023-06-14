@@ -157,7 +157,10 @@ gs = gc.open_by_key("1fafopRuFhQZMhlA1TfQt__jBoSeq6LcilvY-sKsDmHI")# select a wo
 ws = gs.worksheet('Sheet1')
 
 # Appending via: https://gist.github.com/Dminor7/0b0cb8d6b711a3bedd72a14f312883d1
-ws.add_rows(logArray.shape[0])
-set_with_dataframe(worksheet=ws, dataframe=logArray, include_index=False, include_column_header=False, resize=False, row=ws.row_count+1)
+
+ws.clear()
+set_with_dataframe(worksheet=ws,dataframe=df,include_index=False,include_column_header=True,resize=True)
+#ws.add_rows(logArray.shape[0])
+#set_with_dataframe(worksheet=ws, dataframe=logArray, include_index=False, include_column_header=False, resize=False, row=ws.row_count+1)
 #df_values = logArray.values.tolist()
 #gs.values_append('Sheet1', {'valueInputOption': 'RAW'}, {'values': df_values})
