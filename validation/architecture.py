@@ -157,4 +157,6 @@ gs = gc.open_by_key("1fafopRuFhQZMhlA1TfQt__jBoSeq6LcilvY-sKsDmHI")# select a wo
 targeted_sheet = gs.worksheet('Sheet1')
 
 targeted_sheet.clear()
-set_with_dataframe(worksheet=targeted_sheet, dataframe=logArray, include_index=False, include_column_header=True, resize=True)
+#set_with_dataframe(worksheet=targeted_sheet, dataframe=logArray, include_index=False, include_column_header=True, resize=True)
+df_values = logArray.values.tolist()
+gs.values_append('Sheet1', {'valueInputOption': 'RAW'}, {'values': df_values})
