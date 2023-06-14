@@ -132,7 +132,7 @@ for i, col_name in enumerate(dmxoutput["bins"]):
     print(dmxoutput['mean_dmx'])
     logArray[col_name] = (dmxoutput['dmxs'][i]+dmxoutput['mean_dmx']).value
 logArray['mean_dmx'] = dmxoutput['mean_dmx'].value
-print(logArray)
+#print(logArray)
 
 
 import glob
@@ -156,20 +156,18 @@ drive = GoogleDrive(gauth)
 gs = gc.open_by_key("1fafopRuFhQZMhlA1TfQt__jBoSeq6LcilvY-sKsDmHI")# select a work sheet from its name
 ws = gs.worksheet('Sheet1')
 
-# Appending via: https://gist.github.com/Dminor7/0b0cb8d6b711a3bedd72a14f312883d1
+# [DIDN'T WORK] Appending via: https://gist.github.com/Dminor7/0b0cb8d6b711a3bedd72a14f312883d1
 
+# First Run to set up the Headers: 
+# https://medium.com/@jb.ranchana/write-and-append-dataframes-to-google-sheets-in-python-f62479460cf0
 #ws.clear()
 #set_with_dataframe(worksheet=ws,dataframe=logArray,include_index=False,include_column_header=True,resize=True)
-#ws.add_rows(2)
-#ws.resize(rows=ws.row_count+1)
 
+# Solution for appending:
+# https://stackoverflow.com/questions/40781295/how-to-find-the-first-empty-row-of-a-google-spread-sheet-using-python-gspread/42476314#42476314
 def next_available_row(sheet, cols_to_sample=2):
   # looks for empty row based on values appearing in 1st N columns
   cols = sheet.range(1, 1, sheet.row_count, cols_to_sample)
   return max([cell.row for cell in cols if cell.value]) + 1
 
-print(next_available_row(ws))
-#ws.append_row([""])
 set_with_dataframe(worksheet=ws, dataframe=logArray, include_index=False, include_column_header=False, resize=False, row=next_available_row(ws))
-#df_values = logArray.values.tolist()
-#gs.values_append('Sheet1', {'valueInputOption': 'RAW'}, {'values': df_values})
