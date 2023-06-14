@@ -133,3 +133,28 @@ for i, col_name in enumerate(dmxoutput["bins"]):
     logArray[col_name] = (dmxoutput['dmxs'][i]+dmxoutput['mean_dmx']).value
 logArray['mean_dmx'] = dmxoutput['mean_dmx'].value
 print(logArray)
+
+
+import glob
+import gspread
+from gspread_dataframe import set_with_dataframe
+from google.oauth2.service_account import Credentials
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+
+scopes = ['https://www.googleapis.com/auth/spreadsheets',
+          'https://www.googleapis.com/auth/drive']
+
+credentials = Credentials.from_service_account_file(glob.glob("gha-creds*.json")[0], scopes=scopes)
+
+gc = gspread.authorize(credentials)
+
+gauth = GoogleAuth()
+drive = GoogleDrive(gauth)
+
+# open a google sheet
+gs = gc.open_by_key("1fafopRuFhQZMhlA1TfQt__jBoSeq6LcilvY-sKsDmHI")# select a work sheet from its name
+targeted_sheet = gs.worksheet('Sheet1')
+
+targeted_sheet.clear()
+set_with_dataframe(worksheet=targeted_sheet, dataframe=logArray, include_index=False, include_column_header=True, resize=True)
